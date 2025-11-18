@@ -1,7 +1,6 @@
 package com.absjrdev.benefitsapi.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -10,12 +9,16 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name ="tb_employee")
+@Table(name ="tb_employees")
 public class Employee {
-    private Integer id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private LocalDate dateBirth;
     private String phone;
     private String email;
+    private String cpf;
 
 }
