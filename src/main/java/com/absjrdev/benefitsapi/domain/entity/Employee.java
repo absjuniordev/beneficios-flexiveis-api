@@ -19,6 +19,13 @@ public class Employee {
     private LocalDate dateBirth;
     private String phone;
     private String email;
+
+    @Column(nullable = false,unique = true)
     private String cpf;
+
+    @ManyToMany
+    @JoinColumn(name = "enterprise_id")
+    private Enterprise enterprise;
+
 
 }
