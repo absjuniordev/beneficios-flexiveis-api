@@ -5,26 +5,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name ="tb_users" )
+@Table(name = "tb_logs_operation")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class User {
+public class LogOperation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+    private String action;
 
-    @Column(nullable = false)
-    private String password;
+    private LocalDateTime dateTime = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "users")
-    private List<LogOperation> logs;
+    private String details;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
