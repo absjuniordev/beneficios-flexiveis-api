@@ -1,5 +1,7 @@
-package com.absjrdev.benefitsapi.domain.entity;
+package com.absjrdev.benefitsapi.domain.benefitsWallet;
 
+import com.absjrdev.benefitsapi.domain.employee.Employee;
+import com.absjrdev.benefitsapi.domain.benefits.Benefits;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

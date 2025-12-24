@@ -1,5 +1,6 @@
-package com.absjrdev.benefitsapi.domain.entity;
+package com.absjrdev.benefitsapi.domain.user;
 
+import com.absjrdev.benefitsapi.domain.logOperation.LogOperation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,10 +20,16 @@ public class User {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    private String name;
+
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private String role;
 
     @OneToMany(mappedBy = "users")
     private List<LogOperation> logs;

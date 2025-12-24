@@ -1,4 +1,4 @@
-package com.absjrdev.benefitsapi.domain.dto.enterprise;
+package com.absjrdev.benefitsapi.api.dto.enterprise;
 
 public record EnterpriseRequestDTO(String name, String cnpj) {
 }

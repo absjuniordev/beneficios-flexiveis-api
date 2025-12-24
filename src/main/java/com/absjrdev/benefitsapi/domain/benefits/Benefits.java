@@ -1,6 +1,7 @@
-package com.absjrdev.benefitsapi.domain.entity;
+package com.absjrdev.benefitsapi.domain.benefits;
 
 
+import com.absjrdev.benefitsapi.domain.benefitsWallet.BenefitsWallet;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

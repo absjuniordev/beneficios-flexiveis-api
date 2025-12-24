@@ -1,6 +1,6 @@
-package com.absjrdev.benefitsapi.domain.dto.logOperation;
+package com.absjrdev.benefitsapi.api.dto.logOperation;
 
-import com.absjrdev.benefitsapi.domain.dto.user.UserResponseDTO;
+import com.absjrdev.benefitsapi.api.dto.user.UserResponseDTO;
 
 
 import java.time.LocalDateTime;

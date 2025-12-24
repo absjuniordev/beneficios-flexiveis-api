@@ -1,5 +1,6 @@
-package com.absjrdev.benefitsapi.domain.entity;
+package com.absjrdev.benefitsapi.domain.employee;
 
+import com.absjrdev.benefitsapi.domain.enterprise.Enterprise;
 import jakarta.persistence.*;
 import lombok.*;
 
