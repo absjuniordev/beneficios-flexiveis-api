@@ -4,15 +4,14 @@ import com.absjrdev.benefitsapi.domain.logOperation.LogOperation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name ="tb_users" )
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@Getter
 public class User {
 
     @Id
@@ -33,5 +32,18 @@ public class User {
 
     @OneToMany(mappedBy = "users")
     private List<LogOperation> logs;
+
+    protected User() {}
+
+    private User(String name, String email, String password, String role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public  static User  create(String name, String email, String password, String role){
+        return new User(name, email, password, role);
+    }
 
 }

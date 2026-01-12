@@ -1,9 +1,12 @@
 package com.absjrdev.benefitsapi.application.service;
 
+import com.absjrdev.benefitsapi.api.dto.user.UserRequestDTO;
 import com.absjrdev.benefitsapi.api.dto.user.UserResponseDTO;
 import com.absjrdev.benefitsapi.domain.user.User;
+import com.absjrdev.benefitsapi.domain.user.exception.ExistEmailException;
 import com.absjrdev.benefitsapi.domain.user.exception.UserNotFoundException;
 import com.absjrdev.benefitsapi.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +16,28 @@ public class UserService {
 
     private UserRepository userRepository;
 
-    public UserResponseDTO getUserByUsername(String username) {
-        var user = userRepository.findByUserName(username).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
-        return toResponse(user);
+    @Transactional
+
+    public UserResponseDTO create(UserRequestDTO request) {
+
+        if (userRepository.existsByEmail(request.email())) {
+            throw new ExistEmailException(request.email());
+        }
+
+        User user = User.create(
+                request.name(),
+                request.email(),
+                request.password(),
+                request.role()
+        );
+
+        return UserResponseDTO.from(userRepository.save(user));
     }
 
-    private UserResponseDTO toResponse(User user) {
-        return new UserResponseDTO(
-                user.getId(),
-                user.getEmail(),
-                user.getRole()
-        );
+    public UserResponseDTO getUserByUsername(String username) {
+        var user = userRepository.findByUserName(username).orElseThrow(() -> new UserNotFoundException(username));
+        return UserResponseDTO.from(user);
     }
+
 
 }
