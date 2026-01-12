@@ -1,7 +1,7 @@
 package com.absjrdev.benefitsapi.domain.user.exception;
 
-public class ExistEmailException extends UserException {
-    public ExistEmailException(String message) {
+public class UserEmailExistException extends UserException {
+    public UserEmailExistException(String message) {
         super("E-mail já cadastrado: " +  message);
     }
 }

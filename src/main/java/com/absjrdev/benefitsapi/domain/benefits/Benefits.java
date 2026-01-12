@@ -1,19 +1,14 @@
 package com.absjrdev.benefitsapi.domain.benefits;
 
-
 import com.absjrdev.benefitsapi.domain.benefitsWallet.BenefitsWallet;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.Getter;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+
+@Getter
 @Entity
-@Table(name ="tb_benefits")
+@Table(name = "tb_benefits")
 public class Benefits {
 
     @Id
@@ -28,5 +23,18 @@ public class Benefits {
 
     @OneToMany(mappedBy = "benefits")
     private List<BenefitsWallet> wallets;
+
+    protected Benefits() {
+    }
+
+    private Benefits(String name, String description, Double limitMonthly) {
+        this.nome = name;
+        this.description = description;
+        this.limitMonthly = limitMonthly;
+    }
+
+    public static Benefits create(String name, String description, Double limitMonthly) {
+        return new Benefits(name, description, limitMonthly);
+    }
 
 }
