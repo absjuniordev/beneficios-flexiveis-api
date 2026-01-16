@@ -120,12 +120,12 @@ Esse padrão evita acoplamento desnecessário e facilita crescimento do projeto 
 | ------ | --------------------------- | -------------------- |
 | POST   | `/auth/register`            | Cria usuário         |
 | POST   | `/auth/login`               | Gera token JWT       |
-| POST   | `/companies`                | Cria empresa         |
-| GET    | `/companies`                | Lista empresas       |
+| POST   | `/enterprises`                | Cria empresa         |
+| GET    | `/enterprises`                | Lista empresas       |
 | POST   | `/employees`                | Cadastra colaborador |
 | POST   | `/benefits`                 | Cria benefício       |
 | POST   | `/wallets/{employeeId}/add` | Adiciona saldo       |
-| GET    | `/reports/company/{id}`     | Relatório geral      |
+| GET    | `/reports/enterprises/{id}`     | Relatório geral      |
 
 ---
 
