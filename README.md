@@ -1,96 +1,125 @@
 # 🚀 Benefícios Flexíveis API
 
-API em **Spring Boot** pra gerenciar benefícios flexíveis de forma simples e profissional.
-A ideia é permitir que empresas cadastrem colaboradores, definam benefícios e controlem saldos sem dor de cabeça — tudo organizado, seguro e fácil de escalar.
+API em **Spring Boot** para gestão de benefícios flexíveis, pensada para ser **simples no uso**, **clara na organização** e **profissional na arquitetura**.
+
+O foco do projeto é resolver um problema real de negócio sem complicar: permitir que empresas gerenciem colaboradores, benefícios e saldos de forma segura, organizada e preparada para crescer.
 
 ---
 
-## 🎯 O que essa API resolve
+## 🎯 Qual problema essa API resolve
 
-Empresas precisam gerenciar benefícios tipo VR, transporte, saúde, gym e etc.
-Normalmente isso vira bagunça. Aqui não.
+Gerenciar benefícios como VR, transporte, saúde, gym pass e similares costuma virar bagunça quando o sistema não foi bem pensado.
 
-A API faz o básico bem-feito e já abre espaço pra coisas mais avançadas depois:
+Essa API resolve isso fazendo o básico **bem-feito**, mas já deixando espaço para evoluções mais robustas:
 
 * Cadastro de empresas
 * Cadastro de colaboradores
-* Tipos de benefícios
-* Carteira individual com saldo
-* Movimentações (crédito e débito)
-* Relatórios pra tomada de decisão
+* Definição de tipos de benefícios
+* Carteira individual de benefícios
+* Controle de saldo (crédito e débito)
+* Relatórios para tomada de decisão
 
-Simples, direto, funcional.
+Nada de exagero. Funcional, claro e sustentável.
 
 ---
 
-## 🔧 O que já tem (ou vai ter rapidinho)
+## 🔧 Funcionalidades
 
-### **Autenticação**
+### 🔐 Autenticação
 
-* Cadastro e login
-* Token JWT pra garantir acesso seguro
+* Cadastro e login de usuários
+* Autenticação via JWT
+* Controle de acesso por contexto
 
-### **Empresas**
+### 🏢 Empresas
 
 * CRUD completo
-* Cada empresa com seus colaboradores
+* Relacionamento com colaboradores
 
-### **Colaboradores**
+### 👤 Colaboradores
 
-* CRUD e vínculo com a empresa
-* Carteira de benefícios individual
+* Cadastro e gerenciamento
+* Vínculo com empresa
+* Carteira individual de benefícios
 
-### **Benefícios**
+### 🎁 Benefícios
 
-* Cadastro dos tipos
+* Cadastro de tipos de benefícios
 * Regras e limites configuráveis
 
-### **Carteira**
+### 💼 Carteira de Benefícios
 
-* Adicionar saldo
-* Consumir saldo
-* Auditoria das operações
+* Crédito de saldo
+* Débito de saldo
+* Auditoria das movimentações
 
-### **Relatórios**
+### 📊 Relatórios
 
-* Resumo por empresa
-* Monitoramento do uso dos benefícios
+* Visão geral por empresa
+* Monitoramento de uso dos benefícios
 
 ---
 
-## 🧱 Como o projeto é organizado
+## 🧱 Arquitetura e organização do projeto
 
-Arquitetura limpa, nada de gambiarra:
+O projeto segue uma **organização orientada por feature (feature-based / domain-oriented)**.
+
+Isso significa que cada funcionalidade é tratada como um módulo completo, mantendo tudo que pertence ao mesmo domínio **junto e coeso**.
+
+### Estrutura geral
 
 ```
-controller/
-service/
-repository/
-dto/
-entity/
-config/
-security/
+com.absjrdev.benefitsapi
+│
+├── config          # Configurações globais (security, OpenAPI, etc.)
+├── common          # Componentes compartilhados (exceptions, utils)
+│
+├── user            # Feature de usuários
+│   ├── api         # Controllers REST
+│   ├── application # Serviços / casos de uso
+│   ├── domain      # Entidade e regras de negócio
+│   ├── dto         # DTOs de entrada e saída
+│   └── repository  # Persistência
+│
+├── benefit         # Feature de benefícios
+├── benefitsWallet  # Feature de carteira de benefícios
+│
+└── BenefitsApiApplication.java
 ```
 
-### Tecnologias
+### Decisões de design adotadas
 
+* **Organização por feature**, não por camada genérica
+* **Domínio isolado**, contendo regras e protegendo estado
+* **Services orquestram**, não concentram regra de negócio
+* **DTOs apenas transportam dados**, sem lógica
+* **Exceções próximas do domínio**, facilitando manutenção
+* Estrutura **simples, previsível e escalável**
+
+Esse padrão evita acoplamento desnecessário e facilita crescimento do projeto sem virar bagunça.
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+* Java 17
 * Spring Boot 3
 * Spring Security + JWT
 * JPA / Hibernate
 * PostgreSQL
-* Docker
+* Docker / Docker Compose
 * Bean Validation
-* Swagger/OpenAPI
+* Swagger / OpenAPI
 * JUnit + MockMvc
 
 ---
 
-## 📌 Exemplos de Endpoints
+## 📌 Exemplos de endpoints
 
-| Método | Rota                        | O que faz            |
+| Método | Rota                        | Descrição            |
 | ------ | --------------------------- | -------------------- |
 | POST   | `/auth/register`            | Cria usuário         |
-| POST   | `/auth/login`               | Gera JWT             |
+| POST   | `/auth/login`               | Gera token JWT       |
 | POST   | `/companies`                | Cria empresa         |
 | GET    | `/companies`                | Lista empresas       |
 | POST   | `/employees`                | Cadastra colaborador |
@@ -100,16 +129,16 @@ security/
 
 ---
 
-## ▶️ Como rodar isso local
+## ▶️ Como rodar o projeto localmente
 
 ### Requisitos
 
 * Java 17
 * Maven
 * Docker
-* PostgreSQL (ou só usar o Docker Compose mesmo)
+* Docker Compose
 
-### Passo a passo
+### Passos
 
 ```bash
 git clone https://github.com/seu-usuario/beneficios-flexiveis-api.git
@@ -120,7 +149,7 @@ docker-compose up -d
 mvn spring-boot:run
 ```
 
-Swagger:
+Swagger UI:
 
 ```
 http://localhost:8080/swagger-ui.html
@@ -128,25 +157,27 @@ http://localhost:8080/swagger-ui.html
 
 ---
 
-## 🎯 Pontos fortes do projeto
+## ✅ Pontos fortes do projeto
 
-* JWT funcionando do jeito certo
-* Logs e auditoria pra dar segurança
-* Camadas bem separadas (controller, service, repo…)
-* Testes automatizados
-* Documentação clara
-* Banco preparado via Docker
+* Arquitetura clara e sustentável
+* Organização profissional por feature
+* JWT implementado corretamente
+* Separação real de responsabilidades
+* Projeto pronto para evoluir sem retrabalho
+* Ambiente reproduzível via Docker
 
-Esse combo é o que faz recrutador olhar teu repo e pensar: “ok, esse dev sabe o que está fazendo”.
+Esse tipo de estrutura é pensada para **projeto real**, não apenas para demonstração.
+
+---
+
+## 🚀 Possíveis evoluções
+
+* Integração com meios de pagamento (sandbox)
+* Mensageria assíncrona (Kafka / RabbitMQ)
+* Notificações por e-mail ou webhook
+* Frontend web (React, Angular ou Vue)
+* Observabilidade (metrics, tracing)
 
 ---
 
-## 🚀 Ideias pra evoluir
-
-* Pagamentos simulados (PIX fake / Stripe sandbox)
-* Painel web (React, Angular ou Vue)
-* Eventos assíncronos com Kafka/RabbitMQ
-* Webhooks ou notificações por e-mail
-
----
-  
+Projeto construído com foco em clareza, organização e boas práticas de mercado.
