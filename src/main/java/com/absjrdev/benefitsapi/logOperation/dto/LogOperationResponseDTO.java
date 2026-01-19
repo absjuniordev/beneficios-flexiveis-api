@@ -1,7 +1,5 @@
 package com.absjrdev.benefitsapi.logOperation.dto;
 
-import com.absjrdev.benefitsapi.user.dto.UserResponseDTO;
-
 
 import java.time.LocalDateTime;
 
